@@ -1,0 +1,60 @@
+
+
+output {
+    height: 1em;
+    background-image:
+        repeating-linear-gradient(150deg, green, blue, green, blue 60px );
+    border-radius: 0.75em;
+    display: block;
+}
+
+#zeit {
+    -webkit-animation: steps 10s linear;
+    animation: steps 10s linear;
+}
+
+#schritte {
+    -webkit-animation: steps 10s steps(20);
+    animation: steps 10s steps(10);
+}
+
+@keyframes steps { 
+    from {width: 0% }
+    to { width: 100% }
+}
+label {
+    display: block;
+}
+label.valid {
+    width: 24px;
+    background: url(valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+label.error {
+    padding-left: 5px;
+    display: inline-block;
+}
+
+input {
+    display: inline-block;
+}
+
+form div {
+    padding: 5px;
+    float: left;
+    clear: left;
+    width: 100%;
+}
+.button2{
+    font-family: Arial,sans-serif; 
+    border-radius: 20px; 
+    font-size: 20px; border: none; 
+    background-color:#F78181; 
+    height :30px; 
+    width: 200px; 
+    padding:3px;}
+
+
+

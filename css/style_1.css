@@ -1,0 +1,80 @@
+caption{
+font-size:30px}
+
+td{
+font-size:20px;
+color:red;}
+
+th{
+font-size:20px;}
+
+p{
+font-size:25px;}
+
+body {
+    background-color:#F3F781;}
+@keyframes example {
+    0%   {background-color:red; left:0px; top:500px;}
+    25%  {background-color:yellow; left:1800px; top:500px;}
+    50%  {background-color:blue; left:1800px; top:800px;}
+    75%  {background-color:green; left:0px; top:800px;}
+    100% {background-color:red; left:0px; top:500px;}
+}
+
+@media screen and (max-width:1680px) {
+    @keyframes example {
+    0%   {background-color:red; left:0px; top:500px;}
+    25%  {background-color:yellow; left:1550px; top:500px;}
+    50%  {background-color:blue; left:1550px; top:800px;}
+    75%  {background-color:green; left:0px; top:800px;}
+    100% {background-color:red; left:0px; top:500px;}
+}
+body{
+background-color:#F3F781;}
+
+									 }
+									 
+@media screen and (max-width:1080px) {
+    @keyframes example {
+    0%   {background-color:red; left:0px; top:530px;}
+    25%  {background-color:yellow; left:885px; top:530px;}
+    50%  {background-color:blue; left:885px; top:800px;}
+    75%  {background-color:green; left:0px; top:800px;}
+    100% {background-color:red; left:0px; top:530px;}
+}
+body{
+background-color:#F3F781;}
+
+									 }
+									 
+	@media screen and (max-width:768px) {
+    @keyframes example {
+    0%   {background-color:red; left:0px; top:585px;}
+    25%  {background-color:yellow; left:370px; top:585px;}
+    50%  {background-color:blue; left:370px; top:800px;}
+    75%  {background-color:green; left:0px; top:800px;}
+    100% {background-color:red; left:0px; top:585px;}
+}
+body{
+background-color:#F3F781;}
+
+									 }
+
+div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count:50;
+}
+.button1{
+    font-family: Arial,sans-serif; 
+    color: #F7FE2E;
+    border-radius: 7px; 
+    font-size: 20px; 
+    background-color: #81BEF7; 
+    height :30px; 
+    width: 180px; 
+    padding:3px;}
