@@ -4,7 +4,7 @@ if (!empty($_POST['nachricht'])) {
     $heute = date("Y-m-d H:i:s");
     $to = 'kipp.thomas@tklustig.de';
     $subject = 'eine neue Nachricht von meiner WebSite';
-    $nachricht = "eine neue Message vom " . $heute . ":<br>" . $_POST['nachricht'];
+    $nachricht = "eine neue Message vom " . $heute . ":\r\n" . $_POST['nachricht'];
     $fromName = "Thomas Kipp";
     $fromEmail = 'kipp.thomas@tklustig.de';
     $header = 'MIME-Version: 1.0' . "\r\n";
@@ -17,10 +17,9 @@ if (!empty($_POST['nachricht'])) {
     $send_mail = str_replace($umlaute, $ersetzen, $nachricht);
     mail($to, $subject, $send_mail, $header);
     $datei = fopen("nachricht.txt", "a+");
-    $ausgabe = "$nachricht\r\n";
     echo"Folgende Parameter wurden verschickt:<br><br>Empfänger:$to<br>Betreff:$subject<br>$nachricht<br>Rumpf:$header";
-    fputs($datei, $heute);
-    fputs($datei, $ausgabe); // schreibt die Nachricht i.d.Datei
+    fputs($datei, $nachricht); // schreibt die Nachricht i.d.Datei
+    fputs($datei, "\r\n");
     fclose($datei);
 } else
     echo"<p><font size= 6>Sie haben keine Nachricht hinterlassen - folglich wurde auch nix gemailt...</p></font>";

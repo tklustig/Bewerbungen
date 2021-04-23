@@ -1,11 +1,11 @@
 <?php
 
-function mailen() {
+function mailen($user) {
     try {
         $heute = date("Y-m-d H:i:s");
         $to = 'kipp.thomas@tklustig.de';
         $subject = 'Eine Neuregistration für Bewerbungen';
-        $nachricht = 'Soeben hat sich der User ' . $_REQUEST["username"] . ' auf der Webapplikation Bewerbungen neu registriert!';
+        $nachricht = "Soeben hat sich der User $user auf der Webapplikation Bewerbungen neu registriert!";
         $fromName = 'Thomas Kipp';
         $fromEmail = 'kipp.thomas@tklustig.de';
         $header = 'MIME-Version: 1.0' . "\r\n";
@@ -23,15 +23,15 @@ function mailen() {
 
 error_reporting(1);
 session_start();
-$pfad = "./pfad/";
+$folder = 'pfad' . DIRECTORY_SEPARATOR;
 $providerPrefix = 'k158364_';
 if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Anmelden") {
     if (!empty($_REQUEST['username']) && !empty($_REQUEST['passwort'])) {
         try {
             $datenNamen_0 = $_REQUEST['username'] . "_passwort.txt";
             $datenNamen_1 = $_REQUEST['username'] . "_user.txt";
-            $password_show = file_get_contents($pfad . $datenNamen_0);
-            $user_show = file_get_contents($pfad . $datenNamen_1);
+            $password_show = file_get_contents($folder . $datenNamen_0);
+            $user_show = file_get_contents($folder . $datenNamen_1);
         } catch (Exception $e) {
             echo"<br>$e";
             echo"<p><a href='registrieren.php' title='weiter'>Weiter zum Registrierungsformular</a></p>";
@@ -85,20 +85,21 @@ if (!isset($_SESSION['username']))
     <?php
     echo "<p>Ihr Benutzername lautet: " . $_SESSION['username'] . "<br>";
     ?>
-    <p> Nach Betätigen des 'Generieren'-Buttons wird Ihre persönliche Basisdatenbank mit Entitäten,Attributen und drei Beispieltupeln erstellt.
+    <p> Nach Betätigen des 'Generieren'-Buttons wird Ihre persönliche Basisdatenbank mit Entitäten,Attributen und drei Beispieltupeln angefordert.
         <font color="red">Hatten Sie bereits eine Datenbank erzeugt,so brauchen Sie den Button nicht zu betätigen.</font> Zudem sind alle weiteren Menupunkte aktiviert.Viel Spaß und v.a. Erfolg bei Ihren Bewerbungen!</p>
     <form id="backend" name="backend" action=<?= $_SERVER['PHP_SELF']; ?> method="post">    
         <input class="button2" type="submit" name='push' value="Generieren"><br><br>
     </form>
     <?php
     if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Generieren") {
-        /* for Linux, respectively RaspbPi
-          $user = "phpmyadmin";
-          $pw = "1918rott";
-          $databasetyp = "mysql";
-          $hostname = "localhost";
-         */
-
+        //Generatecheck anhand einer Datei
+        $file = $folder . 'generate' . '_' . $_SESSION['username'] . '.txt';
+        if (!file_exists($file)) {
+            fopen($file, 'wb');
+            fclose($file);
+            $boolGenerate = true;
+        } else
+            $boolGenerate = false;
         $databasetyp = "mysql";
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $user = 'root'; // DB-Parameter definieren...
@@ -120,34 +121,44 @@ if (!isset($_SESSION['username']))
         $treffer1 = $dbh->query($sql_1);
         foreach ($treffer1 as $array_) {
             $providerPrefix = 'k158364_';
-            if (in_array($providerPrefix . $_SESSION['username'], $array_)) {
+            $name = strtolower($_SESSION['username']);
+            $findMe = $providerPrefix . $name;
+            if (in_array($findMe, $array_)) {
                 $IstEnthalten = true;
                 break;
             } else
                 $IstEnthalten = false;
         }
         if (!$IstEnthalten) {
+            //da der Hoster per Code keine Datenbankerstellung zulässt, wird die Sache via Mail gecancelt
+            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+                if ($boolGenerate) {
+                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Records der Datenbank: " . $providerPrefix . $_SESSION['username'] . " werden innerhalb 24 Stunden vom Entwickler dieser Anwendung ertellt. Loggen Sie sich morgen nochmals ein!</p>";
+                    if (mailen($_SESSION['username'])) {
+                        echo"<p>Obige Nachricht wurde an den Entwickler gemailt.</p>";
+                    } else
+                        echo'<p>Obige nachricht konnte nicht verschickt werden!';
+                    die();
+                }else {
+                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
+                    die();
+                }
+            }
+            //Linux ENDE
             $providerPrefix = 'k158364_';
             $databaseName = $providerPrefix . $_SESSION['username'];
             $sql_2 = "CREATE DATABASE IF NOT EXISTS " . $databaseName . "";
-            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
-                echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Records der Datenbank: " . $providerPrefix . $_SESSION['username'] . " werden innerhalb 24 Stunden vom Entwickler dieser Anwendung ertellt. Loggen Sie sich morgen nochmals ein!</p>";
-                if (mailen()) {
-                    echo"<p>Obige Nachricht wurde an den Entwickler gemailt.</p>";
-                } else
-                    echo'<p>Obige nachricht konnte nicht verschickt werden!';
-                die();
-            }
-            $treffer2 = $dbh->query($sql_2);
-            $dbh = NULL; // Datenbank schliessen
-            try {
-                $dbh = new PDO("$databasetyp:host=$hostname;dbname=$databaseName;charset=utf8", $user, $pw, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_USE_BUFFERED_QUERY)); // DB-Aufbau objektorientiert
-                echo"<p class='center_1'>Ihre MySQL-Datenbank mit der Bezeichnung: " . $providerPrefix . $_SESSION['username'] . " wurde soeben initialisiert...</p>";
-            } catch (PDOException $e) {
-                print_r("Error!:" . $e->getMessage());
-                exit();
-            }
-            $sql_3 = "  CREATE TABLE IF NOT EXISTS rechtsform(id_recht INT AUTO_INCREMENT,art VARCHAR (20) NOT NULL,PRIMARY KEY(id_recht));
+            if ($boolGenerate) {
+                $treffer2 = $dbh->query($sql_2);
+                $dbh = NULL; // Datenbank schliessen
+                try {
+                    $dbh = new PDO("$databasetyp:host=$hostname;dbname=$databaseName;charset=utf8", $user, $pw, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_USE_BUFFERED_QUERY)); // DB-Aufbau objektorientiert
+                    echo"<p class='center_1'>Ihre MySQL-Datenbank mit der Bezeichnung: " . $providerPrefix . $_SESSION['username'] . " wurde soeben initialisiert...</p>";
+                } catch (PDOException $e) {
+                    print_r("Error!:" . $e->getMessage());
+                    exit();
+                }
+                $sql_3 = "  CREATE TABLE IF NOT EXISTS rechtsform(id_recht INT AUTO_INCREMENT,art VARCHAR (20) NOT NULL,PRIMARY KEY(id_recht));
                         CREATE TABLE IF NOT EXISTS nachricht(id_message INT AUTO_INCREMENT,notiz VARCHAR(25) NOT NULL,PRIMARY KEY(id_message));
 			CREATE TABLE IF NOT EXISTS bewerbungen(bew_id INT AUTO_INCREMENT,datum DATE NOT NULL,firma VARCHAR(100) NOT NULL,rechtsart INT,stadt VARCHAR(100) NOT NULL,plz INT NOT NULL,strasse_nr VARCHAR(100),ansprech_person VARCHAR(100),email VARCHAR(50) NOT NULL,feedback INT,bemerkung VARCHAR(150),PRIMARY KEY (bew_id),FOREIGN KEY (feedback) REFERENCES nachricht(id_message),FOREIGN KEY (rechtsart) REFERENCES rechtsform(id_recht));
 					
@@ -177,14 +188,16 @@ if (!isset($_SESSION['username']))
                         (11, 'IT-Treff', 'https://www.it-treff.de/', 'https://www.it-treff.de/search/it-jobs-stellenangebote/?se=###&v=1,10,0,&&&,3', 'IT'),
                         (12, 'Absolventa', 'http://www.absolventa.de', 'http://www.absolventa.de/jobs/channel/it?utf8=%E2%9C%93&query[text]=###&query[city]=&&&&query[radius]=100&query[dep][]=10409&query[dep][]=10410&query[dep][]=10411&query[dep][]=10412&query[dep][]=10413&query[dep][]=10414&query[dep][]=10415&query[dep][]=10416&query[dep][]=10417&query[dep][]=3&query[dep][]=10418&query[dep][]=10430', 'IT (f?r Studenten, Absolventen) '),           
                         (13, 'ebay kleinanzeigen', 'http://www.ebay-kleinanzeigen.de', 'http://www.ebay-kleinanzeigen.de/s-jobs/&&&/###/k0c102l3155r30', 'Alle Fachrichtungen')";
-            //Viele Wege führen nach Rom. Diesemal ohne die Methode query()
-            $treffer3 = $dbh->prepare($sql_3);
-            $treffer3->execute();
-            if ($treffer1 != FALSE && $treffer2 != FALSE && $treffer3 != FALSE) {
-                echo "<p>Tabellen und Bewerbungen wurden in der Datenbank: " . $providerPrefix . $_SESSION['username'] . " erstellt und können ab jetzt über obiges Menu abgerufen werden!</p>";
-                $dbh = NULL;
+                //Viele Wege führen nach Rom. Diesemal ohne die Methode query()
+                $treffer3 = $dbh->prepare($sql_3);
+                $treffer3->execute();
+                if ($treffer1 != FALSE && $treffer2 != FALSE && $treffer3 != FALSE) {
+                    echo "<p>Tabellen und Bewerbungen wurden in der Datenbank: " . $providerPrefix . $_SESSION['username'] . " erstellt und können ab jetzt über obiges Menu abgerufen werden!</p>";
+                    $dbh = NULL;
+                } else
+                    echo "<font color='red'>Tabellen konnten nicht erstellt werden. Bitte kontaktieren Sie den Programmierer über die MessageBox!</font>";
             } else
-                echo "<font color='red'>Tabellen konnten nicht erstellt werden. Bitte kontaktieren Sie den Programmierer über die MessageBox!</font>";
+                echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
         } else
             echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
     }

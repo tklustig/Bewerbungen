@@ -2,10 +2,10 @@
 
 if (!empty($_REQUEST['username']) && !empty($_REQUEST[('passwort')])) {
     $passwordPlain = $_REQUEST["passwort"]; //hier befindet sich das Userpasswort, allerdings unverschlüsselt
-    $user = $_REQUEST["username"]; //hier befindet sich der Benutzername
+    $user = umwandeln($_REQUEST["username"]); //hier befindet sich der Benutzername
     $passwordEncrypted = password_hash($passwordPlain, PASSWORD_DEFAULT); //hier wird das Userpasswort verschlüsselt
-    $PasswordTxt = $_REQUEST["username"] . "_passwort.txt";
-    $UserTxt = $_REQUEST["username"] . "_user.txt";
+    $PasswordTxt = $user . "_passwort.txt";
+    $UserTxt = $user . "_user.txt";
     $pfad = "./pfad/";
     if (!file_exists($pfad . $PasswordTxt) && !file_exists($pfad . $UserTxt)) {
         $WritePasswordFile = fopen($pfad . $PasswordTxt, "w"); //hier wird eine Datei geöfnet....
@@ -29,10 +29,10 @@ if (!empty($_REQUEST['username']) && !empty($_REQUEST[('passwort')])) {
             print_r("<p>Das Passwort konnte nicht verifiziert werden</p>");
             print_r("Script corrupted");
             die();
-        } 
-		$heute = date("Y-m-d H:i:s").'  ';		
+        }
+        $heute = date("Y-m-d H:i:s") . '  ';
         $subject = 'Eine Neuregistration für Bewerbungen';
-        $nachricht = 'Soeben hat sich der User ' . $_REQUEST["username"] . ' auf der Webapplikation Bewerbungen neu registriert!';        
+        $nachricht = 'Soeben hat sich der User ' . $user . ' auf der Webapplikation Bewerbungen neu registriert!';
         $ausgabe = "$subject\r\n$nachricht\r\n";
         $datei = fopen("nachricht.txt", "a+");
         fputs($datei, $heute);
@@ -69,6 +69,12 @@ function CheckFiles($pfad, $filename) {
         print_r("OK!");
         die();
     }
+}
+
+function umwandeln($string) {
+    $umlaute = array("ä", "ö", "ü", "Ä", "Ö", "Ü", "ß");
+    $ersetzen = array("ae", "oe", "ue", "Ae", "Oe", "Ue", "ss");
+    return str_replace($umlaute, $ersetzen, $string);
 }
 ?>
 
