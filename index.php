@@ -1,7 +1,10 @@
 <?php
 session_start();
-session_destroy();
-//echo nl2br(print_r($_SESSION, true));
+if (!empty($_SESSION)) {
+    foreach ($_SESSION as $element) {
+        unset($element);
+    }
+}
 ?>
 <script>
 // Set the number of snowflakes (more than 30 - 40 not recommended)
