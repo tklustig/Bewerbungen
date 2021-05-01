@@ -83,7 +83,7 @@ session_start();
         <?php echo $_SESSION["anrede"] ?><?php echo $_SESSION["bl"] ?>,<br><div style="text-indent:25px;">hiermit bewerbe ich mich auf Ihre ausgeschriebene Stelle als Softwareentwickler.</div>  <?php //echo $_REQUEST["referenz"] ?>
         <div style="text-indent:25px;">Das Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.<br><br><div style="text-indent:25px;">Mit freundlichen Gruessen<br><div style="text-indent:25px;">Thomas Kipp<br><br></div></div></div></label>
     <?php
-    $anmerkung = "<label>P.S.:\nDiese Nachricht wurde durch meine Website (http://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n<div style='text-indent:45px;'>"
+    $anmerkung = "<label>P.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n<div style='text-indent:45px;'>"
             . $_SESSION["mail_empf"] . " gerichtet ist!</label></div>";
     echo $anmerkung . '<br>';
     ?>
@@ -137,7 +137,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
             $show_mail = $show_mail . "(ID:$referenz) als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
         else
             $show_mail = $show_mail . "als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
-        $anmerkung = "\n\nP.S.:\nDiese Nachricht wurde durch meine Website (http://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n"
+        $anmerkung = "\n\nP.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n"
                 . $_SESSION["mail_empf"] . " gerichtet ist!";
         $show_mail = $show_mail . $anmerkung;
     } else {

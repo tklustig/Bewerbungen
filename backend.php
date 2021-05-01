@@ -1,28 +1,22 @@
 <?php
+session_start();
 
 function mailen($user) {
-    try {
-        $heute = date("Y-m-d H:i:s");
-        $to = 'kipp.thomas@tklustig.de';
-        $subject = 'Eine Neuregistration für Bewerbungen';
-        $nachricht = "Soeben hat sich der User $user auf der Webapplikation Bewerbungen neu registriert!";
-        $fromName = 'Thomas Kipp';
-        $fromEmail = 'kipp.thomas@tklustig.de';
-        $header = 'MIME-Version: 1.0' . "\r\n";
-        $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $header .= 'From:  ' . $fromName . ' <' . $fromEmail . '>' . " \r\n" .
-                'Reply-To: ' . $fromEmail . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-        mail($to, $subject, $nachricht, $header);
+    $to = 'kipp.thomas@tklustig.de';
+    $subject = 'Eine Neuregistration für Bewerbungen';
+    $nachricht = "Soeben hat sich der User $user auf der Webapplikation Bewerbungen neu registriert!";
+    $fromName = 'Thomas Kipp';
+    $fromEmail = 'kipp.thomas@tklustig.de';
+    $header = 'MIME-Version: 1.0' . "\r\n";
+    $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $header .= 'From:  ' . $fromName . ' <' . $fromEmail . '>' . " \r\n" .
+            'Reply-To: ' . $fromEmail . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+    if (mail($to, $subject, $nachricht, $header))
         return true;
-    } catch (Exception $e) {
-        print_r($e->getMessage() . 'at line' . $e->getLine() . 'in' . $e->getFile());
+    else
         return false;
-    }
 }
-
-error_reporting(1);
-session_start();
 $folder = 'pfad' . DIRECTORY_SEPARATOR;
 $providerPrefix = 'k158364_';
 if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Anmelden") {
