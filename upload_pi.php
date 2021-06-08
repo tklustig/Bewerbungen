@@ -136,7 +136,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
         if (!empty($_REQUEST['referenz']))
             $show_mail = $show_mail . "(ID:$referenz) als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
         else
-            $show_mail = $show_mail . "als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
+            $show_mail = $show_mail . " als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
         $anmerkung = "\n\nP.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n"
                 . $_SESSION["mail_empf"] . " gerichtet ist!";
         $show_mail = $show_mail . $anmerkung;
@@ -164,7 +164,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     //Empfängeradresse setzen
     $mail->AddAddress($_SESSION["mail"]);
     //Eine Kopie der Mail an mich schicken. Dient zur (visuellen) Kontrolle
-    $mail->AddBCC('kipp.thomas@tklustig.de');
+    $mail->AddBCC('thomas.kipp@tklustig.de');
     //Betreff der Email setzen
     $mail->Subject = $_REQUEST["betreff"];
     //Text der EMail setzen
