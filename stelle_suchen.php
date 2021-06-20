@@ -173,6 +173,7 @@ session_start();
                     'Uhrmacher', 'Umweltschutztechnischer Assistent',
                     'Veranstaltungskaufmann', 'Verfahrensmechaniker', 'Verkehrsmnister', 'Verfahrenstechnolge', 'Vergolder', 'Verkäufer', 'Vermessungstechniker', 'Verkehrsflugzeugführer', 'Verwaltungsfachangestellter', 'Veterinär', 'Vorpolier',
                     'Wasserbauer', 'Weintechnologe', 'Werkgehilfe', 'Werkstoffprüfer', 'Werkzeugmechaniker', 'Winzer', 'Werkzeugmacher',
+                    'Yii2','Yii2 Developer',
                     'Zahnarzt', 'Zahntechniker', 'Zahnmedizinischer Fachangestellter', 'Zerspannugsmechaniker', 'Zimmermann', 'Zimmerer', 'Zupfinstrumentenmacher', 'Zweiradmechaniker', 'Zweiradmechatroniker'
                 ];
                 $('#jobby').autocomplete({
