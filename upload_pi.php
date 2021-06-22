@@ -153,14 +153,17 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     foreach ($dateien_x as $datei) {
         $_SESSION["anhang_x"] = $datei;
     }
-    echo "<label><font color='blue'>Folgende Bewerbung mitsamt dem Anhang/" . $_SESSION["anhang_x"] . " wurde an die Mailadresse:" . $_SESSION["mail"] . " verschickt:<br><br></label></font>";
-    echo "<label>Betreff: " . $_REQUEST["betreff"] . "<br><br>";
-    echo nl2br($show_mail) . '</label>';
     require('class.phpmailer.php');
     //Instanz von PHPMailer bilden
     $mail = new PHPMailer();
     //Name des Abenders setzen
     $mail->FromName = "Thomas Kipp";
+    $mail->IsSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Username = 'kipp.thomas@tklustig.de';
+    $mail->Password = '1918Rott$';
+    $mail->Host = 'mx2efc.netcup.net';
+    $mail->From = $mail->Username;
     //Empfängeradresse setzen
     $mail->AddAddress($_SESSION["mail"]);
     //Eine Kopie der Mail an mich schicken. Dient zur (visuellen) Kontrolle
@@ -170,11 +173,27 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     //Text der EMail setzen
     $mail->Body = $show_mail;
     //Eine Datei vom Server als Anhang beifügen
-    $mail->AddAttachment('upload/' . $_SESSION["anhang_x"]);
+    $mail->AddAttachment('upload' . DIRECTORY_SEPARATOR . $_SESSION["anhang_x"]);
     //EMail senden und überprüfen ob sie versandt wurde
-    if (!$mail->Send()) {
-        echo "<br>Die Email konnte nicht gesendet werden";
-        echo "<br>Fehler: " . $mail->ErrorInfo;
+    try {
+        $mail->SMTPDebug = 4;
+        $error = $mail->SmtpConnect();
+        if (!$mail->Send() || !$error) {
+            echo "<br>Die Email konnte nicht gesendet werden";
+            echo "<br>Fehler: " . $mail->ErrorInfo;
+            var_dump($error);
+            die();
+        } else {
+            if ($_SESSION['anhang_x'] != '..')
+                echo "<br><label><font color='blue'>Folgende Bewerbung mitsamt dem Anhang/" . $_SESSION["anhang_x"] . " wurde an die Mailadresse:" . $_SESSION["mail"] . " verschickt:<br><br></label></font>";
+            else
+                echo "<br><label><font color='blue'>Folgende Bewerbung wurde an die Mailadresse:" . $_SESSION["mail"] . " verschickt:<br><br></label></font>";
+        }
+        echo "<label>Betreff: " . $_REQUEST["betreff"] . "<br><br>";
+        echo nl2br($show_mail) . '</label>';
+    } catch (Exception $er) {
+        var_dump($er->getMessage() . 'in file ' . $er->getFile() . ' at line ' . $er->getLine());
+        die();
     }
     //Upload in anderen Ordner kopieren
     $upload_copy = opendir($ordner);
