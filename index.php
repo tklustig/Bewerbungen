@@ -128,7 +128,6 @@ if (!empty($_SESSION)) {
         <meta name="page-topic" content="Dienstleistung">		<!-- Zuordnungsdefinition für die Suchmaschine -->
         <meta name="revisit-after" CONTENT="7 days">			<!-- definiert den erneuten Besuch des Spiders//hier:nach sieben Tagen  -->
         <title lang="de">Praktikumsbewerbungen und Arbeitsplatzsuche</title> 	<!-- weist dem HTML-Dokument in der Registerkarte einen Namen zu -->
-        <script src="https://code.jquery.com/jquery-latest.js"></script>
         <script src="js/menus.js"></script>
         <link href="css/style.css" rel="stylesheet">
     </head>
@@ -139,12 +138,6 @@ if (!empty($_SESSION)) {
         <img class="img1" src="img/praktikum.jpg" title="Pic1" alt="Picture1">
         <img class="img1" src="img/praktikum_1.jpg"  title="Pic3" alt="Picture3">
         <img class="img1" src="img/praktikum_2.jpg" title="Pic4" alt="Picture4">
-        <div id="photos"><!-- Die CSS Anweisungen werden in der JS Funktion rotiere_pic() über den css Selektor implementiert -->
-            <img alt="moi_1" src="img/moi_coloured.jpg">
-            <img alt="moi_2" src="img/moi_coloured_large.jpg">
-            <img alt="moi_3" src="img/moi_large_sw.jpg">
-            <img alt="moi_4" src="img/moi_sw.jpg">
-        </div>
         <ul>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="treffer_0" onclick="myFunction_0()">Home</a>
@@ -179,28 +172,6 @@ if (!empty($_SESSION)) {
             window.onload = function () {
                 document.getElementById("impressum").onclick = impressum;
             };
-
-            $(document).ready(function () {
-                rotiere_pic(0);
-            });
-
-            function rotiere_pic(photo_aktuell) {
-                var anzahl = $('#photos img').length;
-                photo_aktuell = photo_aktuell % anzahl;
-
-                $('#photos img').eq(photo_aktuell).fadeOut(function () {
-                    $('#photos img').each(function (i) {
-                        $(this).css(
-                                'zIndex', ((anzahl - i) + photo_aktuell) % anzahl,
-                                );
-                    });
-                    $(this).show();
-                    setTimeout(function () {
-                        rotiere_pic(++photo_aktuell);
-                    }, 750);
-                });
-                $("#photos img").css({top: '70px', height: '120px', width: '120px'});
-            }
             function impressum() {
                 alert("Programmierer &  V.i.S.d.P: Thomas Kipp\nAnschrift:\nKlein - Buchholzer - Kirchweg 25\n30659 Hannover\n Mobil:0152/37389041");
             }

@@ -138,11 +138,6 @@ p{
     font-size:25px;
     color:blue;}
 
-#photos img {
-    position: absolute;
-    top:6%;
-    right: 9%; 
-}
 #sound{
     float:right;
 }
