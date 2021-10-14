@@ -128,7 +128,7 @@ session_start();
                     'Erfurt', 'Erlangen', 'Essen',
                     'Frankfurt(Main)', 'Frankfurt(Oder)', 'Freiburg', 'Fürth',
                     'Gelsenkirchen', 'Göttingen',
-                    'Hannover', 'Hagen', 'Halle', 'Hamburg', 'Hamm', 'Heidelberg', 'Heibronn', 'Herne', 'Hildesheim', 'Heibronn',
+                    'Hannover', 'Hagen', 'Halle', 'Hamburg', 'Hamm', 'Heidelberg', 'Heibronn', 'Herne', 'Hildesheim', 'Heilbronn',
                     'Ingolstadt',
                     'Jena',
                     'Karlsruhe', 'Kassel', 'Kiel', 'Koblenz', 'Köln', 'Krefeld',
