@@ -72,6 +72,7 @@ error_reporting(1); //unterdrückt Warnungen;erst im Produktivbetrieb einsetzen!
                     } else
                         echo "<p>Keine Datensätze vorhanden</p>";
                     ?>
+                <a href='index.php'>zurück</a>
                 <script>
                     document.getElementById('formular').onsubmit = function () {
                         var answer = confirm("Record wirklich löschen??");
