@@ -98,7 +98,7 @@ error_reporting(1); //unterdrückt Warnungen;erst im Produktivbetrieb einsetzen!
                         $treffer3 = $dbh->query($sql3);
                     } catch (PDOException $e) {
                         echo"<p>Sie müssen eine gültige ID angeben</p>";
-                        print "Error!: " . $e->getMessage() . "<br>";
+                        print_r( "Error!: " . $e->getMessage() . "<br>");
                     }
                     if ($treffer3) {
                         echo "Auto-Increment-Index wurde soeben erfolgreich zurückgesetzt!";

@@ -17,6 +17,7 @@ function mailen($user) {
     else
         return false;
 }
+
 $folder = 'pfad' . DIRECTORY_SEPARATOR;
 $providerPrefix = 'k158364_';
 if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Anmelden") {
@@ -26,8 +27,8 @@ if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Anmelden") {
             $datenNamen_1 = $_REQUEST['username'] . "_user.txt";
             $password_show = file_get_contents($folder . $datenNamen_0);
             $user_show = file_get_contents($folder . $datenNamen_1);
-        } catch (Exception $e) {
-            echo"<br>$e";
+        } catch (Exception $er) {
+            var_dump($er);
             echo"<p><a href='registrieren.php' title='weiter'>Weiter zum Registrierungsformular</a></p>";
         }
         if ($_POST['username'] == $user_show && password_verify($_REQUEST['passwort'], $password_show))

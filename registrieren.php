@@ -43,27 +43,28 @@ session_start();
     <div id="signup">
         <form action="write_password.php" method="post">
             <div id="container">
-
                 <div id="content">
                     <h2>Sign up</h2>
-                    <form action="">
-                        <div>
-                            <label for="name">Name:</label>
-                            <input name="username" id="name" type="text"/>
-                        </div>
-                        <div>
-                            <label for="password">Password:</label>
-                            <input name="passwort" id="password" type="password" />
-                        </div>
-                        <div>
-                            <label for="passconf">Confirm Password:</label>
-                            <input name="passconf" id="passconf" type="password" />
-                        </div>
-                        <div>
-                            <input class="button2" type="submit" name="push" value="Registrieren">
-                        </div></div>  <p> Bitte vergessen Sie den Benutzernamen bzw. dass Passwort nicht<br> Eine Wiederherstellung ist (noch) nicht implementiert</p>
-                <a href="index.php">zurück</a></div></form>
+                    <div>
+                        <label for="name">Name:</label>
+                        <input name="username" id="name" type="text"/>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input name="passwort" id="password" type="password" />
+                    </div>
+                    <div>
+                        <label for="passconf">Confirm Password:</label>
+                        <input name="passconf" id="passconf" type="password" />
+                    </div>
+                    <div>
+                        <input class="button2" type="submit" name="push" value="Registrieren">
+                    </div>
+                </div>  
+                <p> Bitte vergessen Sie den Benutzernamen bzw. dass Passwort nicht<br> Eine Wiederherstellung ist (noch) nicht implementiert</p>
+                <a href="index.php">zurück</a>
+            </div>
+        </form>
     </div>
-</form>
 </body>
 </html>
