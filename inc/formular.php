@@ -25,7 +25,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=text name="datum" id="date" value="<?php
             if (!empty($_SESSION['datum']))
                 echo $_SESSION['datum'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Datum;
             ?>">
             <br><br>
@@ -33,7 +33,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=text name="firma" id="firma" value="<?php
             if (!empty($_SESSION['firma']))
                 echo $_SESSION['firma'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Firma;
             ?>">
             <br><br>
@@ -41,7 +41,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=number name="recht" id="recht" min=1 max=10 placeholder="Bitte die Tabellen-ID eingeben"  value="<?php
             if (!empty($_SESSION['recht']))
                 echo $_SESSION['recht'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Rechtsart;
             ?>">
             <br><br>
@@ -49,7 +49,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=text name="stadt" id="location" value="<?php
             if (!empty($_SESSION['stadt']))
                 echo $_SESSION['stadt'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Stadt
                 ?>">
             <br><br>
@@ -57,7 +57,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=number name="plz" id="plz" min=01067 max=99998  value="<?php
             if (!empty($_SESSION['plz']))
                 echo $_SESSION['plz'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Plz;
             ?>">
             <br><br>
@@ -65,7 +65,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=text name="strasse" id="strasse"  value="<?php
             if (!empty($_SESSION['str']))
                 echo $_SESSION['str'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Strasse;
             ?>">
             <br><br>
@@ -73,7 +73,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" name="bl" id="bl" value="<?php
             if (!empty($_SESSION['bl']))
                 echo $_SESSION['bl'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $KontaktPerson;
             ?>">
             <br><br>
@@ -81,7 +81,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=email name="mail" id="mail"  value="<?php
             if (!empty($_SESSION['mail']))
                 echo $_SESSION['mail'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Mail;
             ?>">
             <br><br>
@@ -95,7 +95,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" type=number name="feed" id="feed" min=1 max=3 placeholder="Bitte die Tabellen-ID eingeben"  value="<?php
             if (!empty($_SESSION['feed']))
                 echo $_SESSION['feed'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Feedback;
             ?>">
             <br><br>
@@ -103,7 +103,7 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <input class="button1" name="bem" id="bem" value="<?php
             if (!empty($_SESSION['bem']))
                 echo $_SESSION['bem'];
-            if (!$DesignForNewRecord)
+            else if (!$DesignForNewRecord)
                 echo $Bemerkung;
             ?>">
             <br><br>
