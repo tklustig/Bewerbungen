@@ -4,6 +4,11 @@
         alert('Der Datensatz mit dem Primärschlüssel ' + PrimaryKey + ' wird zum Updaten detailliert angezeigt');
         window.location.href = "update.php?url=" + PrimaryKey + "&link=" + Link;
     }
+    function Link2Bewerben(PrimaryKey)
+    {
+        alert('Der Datensatz mit dem Primärschlüssel ' + PrimaryKey + ' wird zum Bewerben aufbereitet...');
+        window.location.href = "bewerben.php?url="+PrimaryKey;
+    }
 </script>
 <?php
 if (!empty($_REQUEST["search0"])) {
@@ -15,10 +20,9 @@ if (!empty($_REQUEST["search0"])) {
     }
 //print "<br><b><font size='5'><font color='#ff00ff'>Es wurden ".$treffer->rowCount()." Datensätze gefunden</b></font size></font><br><br>";
     if ($treffer) { //sofern Datensätze vorhanden
-        /* eruiere den */
         $findMe = DIRECTORY_SEPARATOR;
         //finde letztes Vorkommen. $ScriptName stammt von der aufrufenden Datei
-        $ScriptName=__FILE__;
+        $ScriptName = __FILE__;
         $pos = strrpos($ScriptName, $findMe);
         //schneide String ab. Da der DIRECTORY_SEPERATOR ebenfalls verschwinden soll, wird $pos um eins erhöht
         $RenderBack = substr($ScriptName, $pos + 1);
@@ -47,11 +51,12 @@ if (!empty($_REQUEST["search0"])) {
                     </tr>
                 </thead>
                 <?=
-                "<td  bgcolor=#F2F5A9>" . $daten['datum'] . "</td><td  bgcolor=#A9BCF5>" . $daten['firma'] . "</td><td  bgcolor=#A9F5BC>" . $daten['art'] . "</td>
+                "<tr><td  bgcolor=#F2F5A9>" . $daten['datum'] . "</td><td  bgcolor=#A9BCF5>" . $daten['firma'] . "</td><td  bgcolor=#A9F5BC>" . $daten['art'] . "</td>
                     <td  bgcolor=#F5A9F2>" . $daten['stadt'] . "</td><td bgcolor=#A9F5BC>" . $daten['plz'] . "</td><td  bgcolor=#FA58D0>" . $daten['strasse_nr'] . "</td>
                     <td  bgcolor=#BE81F7>" . $daten['ansprech_person'] . "</td><td  bgcolor=yellow>" . $daten['email'] . "</td>
                     <td  bgcolor=#FAAC58>" . $daten['feedback'] . "</td><td bgcolor=#01DF01>" . $daten['bemerkung'] . '</td>' .
-                "<td><input type='button' name='button' value='Updaten' onclick=\"Link2Update('$id','$RenderBack')\">" . '</td></tr></table>';
+                "<td><input type='button' name='button' value='Updaten' onclick=\"Link2Update('$id','$RenderBack')\">" . '</td>' .
+                "<td><input type='button' name='button' value='Bewerben' onclick=\"Link2Bewerben('$id','$RenderBack')\">" . '</td></tr></table>';
             }
         } else
             echo "<p>Keine Datensätze vorhanden</p>"; //sofern keine Datensätze vorhanden
