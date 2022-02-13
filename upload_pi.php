@@ -157,7 +157,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     //Instanz von PHPMailer bilden
     $mail = new PHPMailer();
     //Name des Abenders setzen
-    $mail->FromName = "Thomas Kipp";
+    $mail->FromName = "Kipp,Thomas";
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->Username = 'kipp_thomas@tklustig.de';
@@ -167,7 +167,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     //Empfängeradresse setzen
     $mail->AddAddress($_SESSION["mail"]);
     //Eine Kopie der Mail an mich schicken. Dient zur (visuellen) Kontrolle
-    $mail->AddBCC('thomas.kipp@tklustig.de');
+    $mail->AddBCC('thomas_kipp@tklustig.de');
     //Betreff der Email setzen
     $mail->Subject = $_REQUEST["betreff"];
     //Text der EMail setzen
