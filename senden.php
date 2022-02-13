@@ -2,11 +2,11 @@
 
 if (!empty($_POST['nachricht'])) {
     $heute = date("Y-m-d H:i:s");
-    $to = 'kipp.thomas@tklustig.de';
+    $to = 'thomas_kipp@tklustig.de';
     $subject = 'eine neue Nachricht von meiner WebSite';
     $nachricht = "eine neue Message vom " . $heute . ":\r\n" . $_POST['nachricht'];
     $fromName = "Thomas Kipp";
-    $fromEmail = 'kipp.thomas@tklustig.de';
+    $fromEmail = 'kipp_thomas@tklustig.de';
     $header = 'MIME-Version: 1.0' . "\r\n";
     $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $header .= 'From:  ' . $fromName . ' <' . $fromEmail . '>' . " \r\n" .
@@ -15,7 +15,7 @@ if (!empty($_POST['nachricht'])) {
     $umlaute = array("ä", "ö", "ü", "Ä", "Ö", "Ü", "ß");
     $ersetzen = array("ae", "oe", "ue", "Ae", "Oe", "Ue", "ss");
     $send_mail = str_replace($umlaute, $ersetzen, $nachricht);
-    mail($to, $subject, $send_mail, $header);
+    //mail($to, $subject, $send_mail, $header);
     $datei = fopen("nachricht.txt", "a+");
     echo"Folgende Parameter wurden verschickt:<br><br>Empfänger:$to<br>Betreff:$subject<br>$nachricht<br>Rumpf:$header";
     fputs($datei, $nachricht); // schreibt die Nachricht i.d.Datei

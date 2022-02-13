@@ -2,11 +2,11 @@
 session_start();
 
 function mailen($user) {
-    $to = 'kipp.thomas@tklustig.de';
+    $to = 'thomas_kipp@tklustig.de';
     $subject = 'Eine Neuregistration für Bewerbungen';
     $nachricht = "Soeben hat sich der User $user auf der Webapplikation Bewerbungen neu registriert!";
     $fromName = 'Thomas Kipp';
-    $fromEmail = 'kipp.thomas@tklustig.de';
+    $fromEmail = 'kipp_thomas@tklustig.de';
     $header = 'MIME-Version: 1.0' . "\r\n";
     $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $header .= 'From:  ' . $fromName . ' <' . $fromEmail . '>' . " \r\n" .
