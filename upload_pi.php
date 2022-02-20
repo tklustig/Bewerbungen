@@ -161,7 +161,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->Username = 'kipp_thomas@tklustig.de';
-    $mail->Password = '';
+    $mail->Password = 'strengGeheim';
     $mail->Host = 'mx2efc.netcup.net';
     $mail->From = $mail->Username;
     //Empfängeradresse setzen

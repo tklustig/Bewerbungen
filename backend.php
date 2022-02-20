@@ -102,7 +102,7 @@ if (!isset($_SESSION['username']))
             $hostname = "localhost";
         } else {
             $user = 'k158364_kipp'; // DB-Parameter definieren...
-            $pw = '1918Rott$';
+            $pw = 'strengGeheim';
             $hostname = "mysql2efb.netcup.net";
         }
         try {

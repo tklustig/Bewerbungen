@@ -6,7 +6,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     $hostname = "localhost";
 } else {
     $user = 'k158364_kipp'; // DB-Parameter definieren...
-    $pw = '1918Rott$';
+    $pw = 'strengGeheim';
     $hostname = "mysql2efb.netcup.net";
 }
 $providerPrefix = 'k158364_';
