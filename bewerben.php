@@ -60,6 +60,13 @@ if (!empty($_REQUEST["search0"])) {
             $_SESSION["mail"] = $mailAdresse;
             $_SESSION["mail_empf"] = $_REQUEST['mailadress'];
             $_SESSION["bl"] = $kontaktPerson;
+            $mailanrede = stripos($kontaktPerson, 'Herr');
+            if ($mailanrede !== false)
+                $anrede = "Sehr geehrte";
+            else
+                $anrede = "Sehr geehrter";
+
+            $_SESSION["anrede"] = $anrede;
             unset($_SESSION['id']);
             header("Location:upload_pi.php");
         }
