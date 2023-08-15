@@ -16,9 +16,9 @@ if (!empty($_REQUEST["search0"])) {
     $treffer = $dbh->query($sql); // obejektorientierte Abfrage definieren
     $treffer1 = $dbh->query($sql1);
     foreach ($treffer1 as $daten) {
-        print "<br><b><font size='5'><font color='#FA5858'>Es wurden " . $daten['anzahl'] . " Datensätze gefunden</b></font size></font><br><br>";
+        echo "<br><b><font size='5'><font color='#FA5858'>Es wurden " . $daten['anzahl'] . " Datensätze gefunden</b></font size></font><br><br>";
     }
-//print "<br><b><font size='5'><font color='#ff00ff'>Es wurden ".$treffer->rowCount()." Datensätze gefunden</b></font size></font><br><br>";
+//echo "<br><b><font size='5'><font color='#ff00ff'>Es wurden ".$treffer->rowCount()." Datensätze gefunden</b></font size></font><br><br>";
     if ($treffer) { //sofern Datensätze vorhanden
         $findMe = DIRECTORY_SEPARATOR;
         //finde letztes Vorkommen. $ScriptName stammt von der aufrufenden Datei
@@ -35,7 +35,7 @@ if (!empty($_REQUEST["search0"])) {
             } else
                 $id = $daten['bew_id'];
             ?>
-            <table class="doFixed"><tr>
+            <table class="doFixed">
                 <thead>
                     <tr>
                         <td  bgcolor=#F2F5A9>Datum</td>

@@ -23,87 +23,51 @@ function FormularAnzeigen($DesignForNewRecord, $Datum = NULL, $Firma = NULL, $Re
             <label><?= $zusatz ?></label><br><br>
             <label>:Datum * </label>
             <input class="button1" type=text name="datum" id="date" value="<?php
-            if (!empty($_SESSION['datum']))
-                echo $_SESSION['datum'];
-            else if (!$DesignForNewRecord)
-                echo $Datum;
+            echo $Datum;
             ?>">
             <br><br>
             <label>:Firmenname *</label>
             <input class="button1" type=text name="firma" id="firma" value="<?php
-            if (!empty($_SESSION['firma']))
-                echo $_SESSION['firma'];
-            else if (!$DesignForNewRecord)
-                echo $Firma;
+            echo $Firma;
             ?>">
             <br><br>
             <label>:Rechtsart * </label>
             <input class="button1" type=number name="recht" id="recht" min=1 max=10 placeholder="Bitte die Tabellen-ID eingeben"  value="<?php
-            if (!empty($_SESSION['recht']))
-                echo $_SESSION['recht'];
-            else if (!$DesignForNewRecord)
-                echo $Rechtsart;
+            echo $Rechtsart;
             ?>">
             <br><br>
             <label>:Stadt *</label>
             <input class="button1" type=text name="stadt" id="location" value="<?php
-            if (!empty($_SESSION['stadt']))
-                echo $_SESSION['stadt'];
-            else if (!$DesignForNewRecord)
-                echo $Stadt
-                ?>">
+            echo $Stadt
+            ?>">
             <br><br>
             <label>:Postleizahl *</label>
             <input class="button1" type=number name="plz" id="plz" min=01067 max=99998  value="<?php
-            if (!empty($_SESSION['plz']))
-                echo $_SESSION['plz'];
-            else if (!$DesignForNewRecord)
-                echo $Plz;
+            echo $Plz;
             ?>">
             <br><br>
             <label>:Strasse</label>
             <input class="button1" type=text name="strasse" id="strasse"  value="<?php
-            if (!empty($_SESSION['str']))
-                echo $_SESSION['str'];
-            else if (!$DesignForNewRecord)
-                echo $Strasse;
+            echo $Strasse;
             ?>">
             <br><br>
             <label>:Ansprechperson</label>
             <input class="button1" name="bl" id="bl" value="<?php
-            if (!empty($_SESSION['bl']))
-                echo $_SESSION['bl'];
-            else if (!$DesignForNewRecord)
-                echo $KontaktPerson;
+            echo $KontaktPerson;
             ?>">
             <br><br>
             <label>:Email/Firma *</label>
             <input class="button1" type=email name="mail" id="mail"  value="<?php
-            if (!empty($_SESSION['mail']))
-                echo $_SESSION['mail'];
-            else if (!$DesignForNewRecord)
-                echo $Mail;
+            echo $Mail;
             ?>">
-            <br><br>
-            <label>:Email/Bewerber </label>
-            <input class="button1" type=email name="mail_empf" id="mail_empf"  value="<?php
-            if (!empty($_SESSION['mail_empf']))
-                echo $_SESSION['mail_empf'];
-            ?>">
-            <br><br>
+            <br><br>          
             <label>:feedback * </label>
             <input class="button1" type=number name="feed" id="feed" min=1 max=3 placeholder="Bitte die Tabellen-ID eingeben"  value="<?php
-            if (!empty($_SESSION['feed']))
-                echo $_SESSION['feed'];
-            else if (!$DesignForNewRecord)
-                echo $Feedback;
+            echo $Feedback;
             ?>">
             <br><br>
             <label>:Bemerkungen</label>
-            <input class="button1" name="bem" id="bem" value="<?php
-            if (!empty($_SESSION['bem']))
-                echo $_SESSION['bem'];
-            else if (!$DesignForNewRecord)
+            <input class="button1" name="bem" id="bem" value="<?php          
                 echo $Bemerkung;
             ?>">
             <br><br>
