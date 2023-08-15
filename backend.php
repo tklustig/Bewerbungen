@@ -19,7 +19,6 @@ function mailen($user) {
 }
 
 $folder = 'pfad' . DIRECTORY_SEPARATOR;
-$providerPrefix = 'k158364_';
 if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Anmelden") {
     if (!empty($_REQUEST['username']) && !empty($_REQUEST['passwort'])) {
         try {
@@ -88,7 +87,7 @@ if (!isset($_SESSION['username']))
     <?php
     if (isset($_REQUEST['push']) && $_REQUEST['push'] == "Generieren") {
         //Generatecheck anhand einer Datei
-        $file = $folder . 'generate' . '_' . $_SESSION['username'] . '.txt';
+        $file = $folder . 'generate_' . $_SESSION['username'] . '.txt';
         if (!file_exists($file)) {
             fopen($file, 'wb');
             fclose($file);
@@ -115,9 +114,8 @@ if (!isset($_SESSION['username']))
         $sql_1 = 'SHOW DATABASES;';
         $treffer1 = $dbh->query($sql_1);
         foreach ($treffer1 as $array_) {
-            $providerPrefix = 'k158364_';
             $name = strtolower($_SESSION['username']);
-            $findMe = $providerPrefix . $name;
+            $findMe = $name;
             if (in_array($findMe, $array_)) {
                 $IstEnthalten = true;
                 break;
@@ -128,27 +126,26 @@ if (!isset($_SESSION['username']))
             //da der Hoster per Code keine Datenbankerstellung zulässt, wird die Sache via Mail gecancelt
             if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
                 if ($boolGenerate) {
-                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Records der Datenbank: " . $providerPrefix . $_SESSION['username'] . " werden innerhalb 24 Stunden vom Entwickler dieser Anwendung ertellt. Loggen Sie sich morgen nochmals ein!</p>";
+                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Records der Datenbank: " . $_SESSION['username'] . " werden innerhalb 24 Stunden vom Entwickler dieser Anwendung ertellt. Loggen Sie sich morgen nochmals ein!</p>";
                     if (mailen($_SESSION['username'])) {
                         echo"<p>Obige Nachricht wurde an den Entwickler gemailt.</p>";
                     } else
                         echo'<p>Obige nachricht konnte nicht verschickt werden!';
                     die();
                 }else {
-                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
+                    echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " .$_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
                     die();
                 }
             }
             //Linux ENDE
-            $providerPrefix = 'k158364_';
-            $databaseName = $providerPrefix . $_SESSION['username'];
+            $databaseName = $_SESSION['username'];
             $sql_2 = "CREATE DATABASE IF NOT EXISTS " . $databaseName . "";
             if ($boolGenerate) {
                 $treffer2 = $dbh->query($sql_2);
                 $dbh = NULL; // Datenbank schliessen
                 try {
                     $dbh = new PDO("$databasetyp:host=$hostname;dbname=$databaseName;charset=utf8", $user, $pw, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_USE_BUFFERED_QUERY)); // DB-Aufbau objektorientiert
-                    echo"<p class='center_1'>Ihre MySQL-Datenbank mit der Bezeichnung: " . $providerPrefix . $_SESSION['username'] . " wurde soeben initialisiert...</p>";
+                    echo"<p class='center_1'>Ihre MySQL-Datenbank mit der Bezeichnung: " .$_SESSION['username'] . " wurde soeben initialisiert...</p>";
                 } catch (PDOException $e) {
                     print_r("Error!:" . $e->getMessage());
                     exit();
@@ -186,15 +183,15 @@ if (!isset($_SESSION['username']))
                 //Viele Wege führen nach Rom. Diesemal ohne die Methode query()
                 $treffer3 = $dbh->prepare($sql_3);
                 $treffer3->execute();
-                if ($treffer1 != FALSE && $treffer2 != FALSE && $treffer3 != FALSE) {
-                    echo "<p>Tabellen und Bewerbungen wurden in der Datenbank: " . $providerPrefix . $_SESSION['username'] . " erstellt und können ab jetzt über obiges Menu abgerufen werden!</p>";
-                    $dbh = NULL;
+                if ($treffer1 != false && $treffer2 != false && $treffer3 != false) {
+                    echo "<p>Tabellen und Bewerbungen wurden in der Datenbank: " .$_SESSION['username'] . " erstellt und können ab jetzt über obiges Menu abgerufen werden!</p>";
+                    $dbh = null;
                 } else
                     echo "<font color='red'>Tabellen konnten nicht erstellt werden. Bitte kontaktieren Sie den Programmierer über die MessageBox!</font>";
             } else
-                echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
+                echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " .$_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
         } else
-            echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " . $providerPrefix . $_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
+            echo "<font color='red'><p>ABBRUCH !</font><p><p>Tabellen und Bewerbungen der Datenbank: " .$_SESSION['username'] . " wurden bereits erstellt und können über obiges Menu abgerufen werden!</p>";
     }
     ?>
 </body>

@@ -83,7 +83,7 @@ session_start();
         <?php echo $_SESSION["anrede"] ?><?php echo $_SESSION["bl"] ?>,<br><div style="text-indent:25px;">hiermit bewerbe ich mich auf Ihre ausgeschriebene Stelle als Softwareentwickler.</div>  <?php //echo $_REQUEST["referenz"] ?>
         <div style="text-indent:25px;">Das Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.<br><br><div style="text-indent:25px;">Mit freundlichen Gruessen<br><div style="text-indent:25px;">Thomas Kipp<br><br></div></div></div></label>
     <?php
-    $anmerkung = "<label>P.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n<div style='text-indent:45px;'>"
+    $anmerkung = "<label><div style='text-indent:25px;'>P.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre<br><div style='text-indent:70px;'> Antwort ggf. an die Adresse "
             . $_SESSION["mail_empf"] . " gerichtet ist!</label></div>";
     echo $anmerkung . '<br>';
     ?>
@@ -132,18 +132,18 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     if (!empty($_REQUEST['referenz']))
         $referenz = $_REQUEST['referenz'];
     if ($_REQUEST["radio_choice"] == "wahl_0") {
-        $show_mail = $_SESSION["anrede"] . " " . $_SESSION["bl"] . ",\n\nhiermit bewerbe ich mich auf Ihre ausgeschriebene Stelle";
+        $show_mail = $_SESSION["anrede"] . $_SESSION["bl"] . ",\n\nhiermit bewerbe ich mich auf Ihre ausgeschriebene Stelle";
         if (!empty($_REQUEST['referenz']))
             $show_mail = $show_mail . "(ID:$referenz) als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
         else
-            $show_mail = $show_mail . " als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen,\nThomas Kipp";
-        $anmerkung = "\n\nP.S.:\nDiese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n"
-                . $_SESSION["mail_empf"] . " gerichtet ist!";
+            $show_mail = $show_mail . " als Softwareentwickler.\nDas Anschreiben sowie meine Referenzen sind komplett als Anhang beigefuegt.\n\nMit freundlichen Gruessen\nThomas Kipp";
+$anmerkung = "\n\nP.S.:Diese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse "
+            . $_SESSION["mail_empf"] . " gerichtet ist!";
         $show_mail = $show_mail . $anmerkung;
     } else {
         $show_mail = $_REQUEST["nachricht"];
-        $anmerkung = "\n\nP.S.:\nDiese Nachricht wurde durch meine Website erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse\n"
-                . $_SESSION["mail_empf"] . " gerichtet ist!";
+ $anmerkung = "\n\nP.S.:Diese Nachricht wurde durch meine Website (https://tklustig.de) erstellt und verschickt. Stellen Sie folglich bitte sicher, dass Ihre Antwort ggf. an die Adresse "
+            . $_SESSION["mail_empf"] . " gerichtet ist!";
         $message = $show_mail . $anmerkung;
         $umlaute = array("ä", "ö", "ü", "Ä", "Ö", "Ü", "ß");
         $ersetzen = array("ae", "oe", "ue", "Ae", "Oe", "Ue", "ss");
@@ -167,7 +167,7 @@ if (!empty($_REQUEST["mail_send"]) && $_REQUEST["mail_send"] == "Bewerben") {
     //Empfängeradresse setzen
     $mail->AddAddress($_SESSION["mail"]);
     //Eine Kopie der Mail an mich schicken. Dient zur (visuellen) Kontrolle
-    $mail->AddBCC('thomas_kipp@tklustig.de');
+    $mail->AddBCC('tklustig.thomas@gmail.com');
     //Betreff der Email setzen
     $mail->Subject = $_REQUEST["betreff"];
     //Text der EMail setzen
